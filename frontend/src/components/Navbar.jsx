@@ -2,10 +2,13 @@ import React from "react"
 import { useMediaQuery } from "react-responsive"
 import { Link, Box, Text, Stack, Avatar, Heading, Collapse, Divider } from "@chakra-ui/react"
 
-const NavBar = ({ showLogo = true, authorized, ...props }) => {
+const NavBar = ({ showLogo = true, email, ...props }) => {
   const [isOpen, setIsOpen] = React.useState(false)
 
-  const { data } = { email: authorized }
+  let data
+  if (email) {
+    data = { email }
+  }
 
   const isMobile = useMediaQuery({ query: "(max-width: 768px)" })
 

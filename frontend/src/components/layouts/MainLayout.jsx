@@ -2,7 +2,7 @@ import React from "react"
 import { Container, Box } from "@chakra-ui/react"
 import Navbar from "../Navbar"
 
-export default function MainLayout ({ showLogo, backgroundColor, authorized }) {
+export default function MainLayout ({ showLogo, backgroundColor, email }) {
   return (
       <Box
           textAlign="center"
@@ -14,8 +14,9 @@ export default function MainLayout ({ showLogo, backgroundColor, authorized }) {
               maxW='8xl'
               padding={0}
           >
-              <Navbar showLogo={showLogo} authorized={authorized}/>
+              <Navbar showLogo={showLogo} email={email}/>
           </Container>
+          {email}
       </Box>
   )
 }

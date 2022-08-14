@@ -9,7 +9,7 @@ function App () {
             <Router>
                 <Routes>
                     <Route exact path="/" element={<MainLayout />} />
-                    <Route exact path="/authorized" element={<MainLayout authorized/>} />
+                    <Route exact path="/authorized" element={<MainLayout email={"MyEmail"}/>} />
                 </Routes>
             </Router>
         <ColorModeScript />
