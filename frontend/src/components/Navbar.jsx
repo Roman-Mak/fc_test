@@ -1,6 +1,6 @@
 import React from "react"
 import { useMediaQuery } from "react-responsive"
-import { Link, Box, Text, Stack, Avatar, Heading, Collapse, Divider } from "@chakra-ui/react"
+import { Link, Box, Text, Stack, Avatar, Heading, Collapse, Divider, Icon } from "@chakra-ui/react"
 
 const NavBar = ({ showLogo = true, email, ...props }) => {
   const [isOpen, setIsOpen] = React.useState(false)
@@ -16,10 +16,21 @@ const NavBar = ({ showLogo = true, email, ...props }) => {
 
   return (
     <NavBarContainer {...props}>
-      {(() => {
-        return showLogo ? <Title/> : <Box />
-      })()}
+      {!isMobile && showTitle(showLogo)}
       <MenuToggle toggle={toggle} isOpen={isOpen} />
+      {isMobile && showTitle(showLogo)}
+      {
+        isMobile &&
+          <MenuItem to="/profile">
+                <Avatar
+                    color='teal.500'
+                    name={data?.email}
+                    icon={<DefaultAvatarIcon color="teal.500" fontSize='2rem' />}
+                    bg='white'
+                    size='sm'
+                  />
+          </MenuItem>
+      }
       <MenuLinks isOpen={isOpen && isMobile}>
         <Stack
           spacing={8}
@@ -58,6 +69,10 @@ const NavBar = ({ showLogo = true, email, ...props }) => {
   )
 }
 
+const showTitle = (show) => {
+  return show ? <Title/> : <Box />
+}
+
 const CloseIcon = () => (
   <svg width="24" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
     <title>Close</title>
@@ -66,6 +81,13 @@ const CloseIcon = () => (
       d="M9.00023 7.58599L13.9502 2.63599L15.3642 4.04999L10.4142 8.99999L15.3642 13.95L13.9502 15.364L9.00023 10.414L4.05023 15.364L2.63623 13.95L7.58623 8.99999L2.63623 4.04999L4.05023 2.63599L9.00023 7.58599Z"
     />
   </svg>
+)
+
+const DefaultAvatarIcon = (props) => (
+  <Icon viewBox="0 0 128 128" role="img" aria-label=" avatar" {...props}>
+    <path fill="currentColor" d="M103,102.1388 C93.094,111.92 79.3504,118 64.1638,118 C48.8056,118 34.9294,111.768 25,101.7892 L25,95.2 C25,86.8096 31.981,80 40.6,80 L87.4,80 C96.019,80 103,86.8096 103,95.2 L103,102.1388 Z"></path>
+    <path fill="currentColor" d="M63.9961647,24 C51.2938136,24 41,34.2938136 41,46.9961647 C41,59.7061864 51.2938136,70 63.9961647,70 C76.6985159,70 87,59.7061864 87,46.9961647 C87,34.2938136 76.6985159,24 63.9961647,24"></path>
+  </Icon>
 )
 
 const MenuIcon = () => (
@@ -127,7 +149,7 @@ const MenuLinks = ({ isOpen, children }) => {
 
 function Title () {
   return (
-        <Box textAlign="left" width={["87%", "90%", "70%", "70%"]}>
+        <Box textAlign="left" width={["70%", "80%", "70%", "70%"]}>
             <Heading
               fontSize={["20px", "2xl", "2xl", "4xl"]}
               color={["white", "white", "teal", "teal"]}
